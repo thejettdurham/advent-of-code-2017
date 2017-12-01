@@ -1,0 +1,17 @@
+{
+  "name": "advent-of-code-2017",
+  "version": "0.0.1",
+  "description": "My advent of code 2017 solutions. This time in as-functional-as-possible ES6 with Ramda and company.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "advent-of-code"
+  ],
+  "author": "Jett Durham",
+  "license": "MIT",
+  "dependencies": {
+    "ramda": "^0.25.0"
+  }
+}
