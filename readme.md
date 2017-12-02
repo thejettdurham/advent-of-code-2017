@@ -16,3 +16,4 @@ Each solution has a usage example in comments at the top, but in general each so
 # Ramda REPL Solutions
 
 - [Day 1](https://goo.gl/iNiKFm)
+- [Day 2](https://goo.gl/xokHhb)
