@@ -17,3 +17,4 @@ Each solution has a usage example in comments at the top, but in general each so
 
 - [Day 1](https://goo.gl/iNiKFm)
 - [Day 2](https://goo.gl/xokHhb)
+- Day 3 (implementation was too long to share 😩)
