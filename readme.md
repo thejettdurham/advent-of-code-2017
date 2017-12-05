@@ -19,3 +19,4 @@ Each solution has a usage example in comments at the top, but in general each so
 - [Day 2](https://goo.gl/xokHhb)
 - Day 3 (implementation was too long to share 😩)
 - [Day 4](https://goo.gl/FeRJh2)
+- [Day 5](https://goo.gl/yW8szg) **Note**: This is the functional implementation that demonstrates the algorithm, but cannot run on the full input size without exceeding the maximum call stack size
