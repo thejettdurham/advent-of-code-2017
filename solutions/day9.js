@@ -28,43 +28,78 @@ const readModes = {
   cancelNext: 2
 };
 
-const streamReducerInitial = [0, 0, readModes.normal, null];
+const streamReducerInitial = {
+  score: 0,
+  groupLevel: 0,
+  thisReadMode: readModes.normal,
+  lastReadMode: null,
+  garbageChars: 0
+};
 
-const streamReducer = ([score, groupLevel, thisReadMode, lastReadMode], char, idx) => {
-  if (thisReadMode === readModes.cancelNext) return [score, groupLevel, lastReadMode, thisReadMode];
+const streamReducer = (acc, char, idx) => {
+  const { score, groupLevel, thisReadMode, lastReadMode, garbageChars } = acc;
+
+  if (thisReadMode === readModes.cancelNext)
+    return { ...acc, thisReadMode: lastReadMode, lastReadMode: thisReadMode };
 
   if (thisReadMode === readModes.garbage) {
     if (char === "!")
-      return [score, groupLevel, readModes.cancelNext, thisReadMode];
+      return {
+        ...acc,
+        thisReadMode: readModes.cancelNext,
+        lastReadMode: thisReadMode
+      };
 
     if (char === ">")
-      return [score, groupLevel, readModes.normal, thisReadMode];
+      return {
+        ...acc,
+        thisReadMode: readModes.normal,
+        lastReadMode: thisReadMode
+      };
 
-    return [score, groupLevel, thisReadMode, thisReadMode];
+    return {
+      ...acc,
+      garbageChars: garbageChars + 1,
+      lastReadMode: thisReadMode
+    };
   }
 
   if (char === "}")
-    return [score + groupLevel, groupLevel - 1, thisReadMode, thisReadMode];
+    return {
+      ...acc,
+      score: score + groupLevel,
+      groupLevel: groupLevel - 1,
+      lastReadMode: thisReadMode
+    };
 
   if (char === "{")
-    return [score, groupLevel + 1, thisReadMode, thisReadMode];
+    return { ...acc, groupLevel: groupLevel + 1, lastReadMode: thisReadMode };
 
   if (char === "<")
-    return [score, groupLevel, readModes.garbage, thisReadMode];
+    return {
+      ...acc,
+      thisReadMode: readModes.garbage,
+      lastReadMode: thisReadMode
+    };
 
-  if (char === ",")
-    return [score, groupLevel, readModes.normal, thisReadMode];
+  if (char === ",") return { ...acc, lastReadMode: thisReadMode };
 
-  throw new Error(`Unknown char ${char} at idx ${idx} in readmode ${thisReadMode}`)
+  throw new Error(
+    `Unknown char ${char} at idx ${idx} in readmode ${thisReadMode}`
+  );
 };
 
 const run = input => {
-  R.pipe(
+  const parts = R.pipe(
     R.nth(0),
     R.split(""),
     R.addIndex(R.reduce)(streamReducer, streamReducerInitial),
-    logMe,
-    R.nth(0)
-  )(input)
+  )(input);
 
+  const part1Ans = parts.score;
+  const part2Ans = parts.garbageChars;
+
+  console.log(
+    `Given your input, Part 1 is ${part1Ans} and Part 2 is ${part2Ans}`
+  );
 };
