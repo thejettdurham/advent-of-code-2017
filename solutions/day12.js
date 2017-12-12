@@ -7,10 +7,7 @@
 */
 
 const R = require("ramda");
-const logMe = x => {
-  console.log(x);
-  return x;
-};
+
 const readline = require("readline");
 const r1 = readline.createInterface({
   input: process.stdin,
@@ -97,7 +94,6 @@ const part1 = R.pipe(
 const part2 = R.pipe(
   parseInputIntoGraph,
   graph => getConnectedGroups(graph, 0),
-  logMe,
   R.length
 );
 
