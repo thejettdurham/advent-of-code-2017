@@ -74,3 +74,9 @@ const run = input => {
     `Given your input, Part 1 is ${part1Ans} and Part 2 is ${part2Ans}`
   );
 };
+
+const x = {
+  0: {
+    outs: new Set([])
+  }
+};
