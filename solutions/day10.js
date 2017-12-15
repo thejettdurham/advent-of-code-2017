@@ -79,6 +79,7 @@ const run = input => {
 module.exports = {
   part1,
   part2,
+  knotHash: part2,
   run
 };
 

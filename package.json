@@ -12,6 +12,7 @@
   "author": "Jett Durham",
   "license": "MIT",
   "dependencies": {
+    "hex-to-binary": "^1.0.1",
     "ramda": "^0.25.0"
   }
 }
